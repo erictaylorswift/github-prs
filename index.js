@@ -2,7 +2,12 @@ require('sqreen');
 
 const express = require('express');
 const path = require('path');
-const octokit = require('@octokit/rest')();
+const octokit = require('@octokit/rest')({
+    timeout: 0,
+    headers: {
+        'user-agent': 'octokit/rest.js v6.1.0'
+    },
+});
 const helmet = require('helmet');
 
 
@@ -17,9 +22,8 @@ app.use(helmet.contentSecurityPolicy({
 
 app.get('/pull-requests', (req, res) => {
     octokit.authenticate({
-        type: 'oauth',
-        key: '80b286200b365fe03d84',
-        secret: '8dc91cc01517484022b3cb328687d6d22070c980'
+        type: 'token',
+        token: 'c8a437d837b2019d3d651e0cc7742b029fb573a7',
     }); 
 
     octokit.pullRequests.getAll({
@@ -28,14 +32,14 @@ app.get('/pull-requests', (req, res) => {
         state: 'open',
         sort: 'created',
         direction: 'desc', 
-        // per_page: 5,
-        // page: 1,
+        per_page: 5,
+        page: 1,
     }).then((data) => {return res.send({data: data})})
 });
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port);
