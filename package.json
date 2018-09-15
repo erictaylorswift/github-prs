@@ -1,7 +1,10 @@
 {
   "name": "github-prs",
   "version": "0.1.0",
-  "private": true,
+  "engines": {
+    "node": "10.7.0",
+    "npm": "6.1.0"
+  },
   "dependencies": {
     "@octokit/rest": "^15.11.2",
     "content-security-policy": "^0.3.3",
