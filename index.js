@@ -3,20 +3,17 @@ require('sqreen');
 const express = require('express');
 const path = require('path');
 const octokit = require('@octokit/rest')();
-const csp = require('content-security-policy');
+const helmet = require('helmet');
 
 
 const app = express();
 
-const cspPolicy = {
-    'report-uri': '/reporting',
-    'default-src': csp.SRC_NONE,
-    'script-src': [ csp.SRC_SELF, csp.SRC_DATA]
-};
-
-const globalCSP = csp.getCSP(csp.STARTER_OPTIONS);
-
-app.use(globalCSP);
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ['*'],
+        imgSrc: ['*', 'data:']
+    }
+}));
 
 app.get('/pull-requests', globalCSP, (req, res) => {
     octokit.authenticate({
