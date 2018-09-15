@@ -1,7 +1,10 @@
+require('sqreen');
+
 const express = require('express');
 const path = require('path');
 const octokit = require('@octokit/rest')();
 const csp = require('content-security-policy');
+
 
 const app = express();
 
