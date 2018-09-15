@@ -17,9 +17,9 @@ app.use(globalCSP);
 
 app.get('/pull-requests', globalCSP, (req, res) => {
     octokit.authenticate({
-        type: 'basic',
-        username: 'erictaylorswift',
-        password: 'HFw4fVWbGmtY'
+        type: 'oauth',
+        key: '80b286200b365fe03d84',
+        secret: '8dc91cc01517484022b3cb328687d6d22070c980'
     }); 
 
     octokit.pullRequests.getAll({
