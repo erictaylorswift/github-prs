@@ -1,10 +1,21 @@
 const express = require('express');
 const path = require('path');
 const octokit = require('@octokit/rest')();
+const csp = require('content-security-policy');
 
 const app = express();
 
-app.get('/pull-requests', (req, res) => {
+const cspPolicy = {
+    'report-uri': '/reporting',
+    'default-src': csp.SRC_NONE,
+    'script-src': [ csp.SRC_SELF, csp.SRC_DATA]
+};
+
+const globalCSP = csp.getCSP(csp.STARTER_OPTIONS);
+
+app.use(globalCSP);
+
+app.get('/pull-requests', globalCSP, (req, res) => {
     octokit.authenticate({
         type: 'basic',
         username: 'erictaylorswift',
