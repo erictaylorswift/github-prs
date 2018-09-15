@@ -15,7 +15,7 @@ app.use(helmet.contentSecurityPolicy({
     }
 }));
 
-app.get('/pull-requests', globalCSP, (req, res) => {
+app.get('/pull-requests', (req, res) => {
     octokit.authenticate({
         type: 'oauth',
         key: '80b286200b365fe03d84',
