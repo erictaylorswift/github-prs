@@ -1,0 +1,33 @@
+.pull-card{
+    max-width: 545px;
+    min-width: 545px;
+    margin: 16px;
+    flex-direction: row;
+    min-height: 260px;
+}
+
+.header {
+    padding: 0 !important;
+    background-color: midnightblue;
+    min-height: 104px;
+}
+
+.title-link {
+    text-transform: capitalize;
+    color: rgb(255, 255, 255) !important;
+    padding-top: 16px;
+}
+
+.avatar {
+    border-radius: 50%;
+    max-width: 72px;
+    position: relative;
+    left: -260px;
+    top: 48px;
+}
+
+.label {
+    color: slateblue !important;
+    font-weight: 700 !important;
+    padding-top: 16px;
+}

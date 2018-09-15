@@ -14,9 +14,11 @@ app.get('/pull-requests', (req, res) => {
     octokit.pullRequests.getAll({
         owner: 'RoomRoster',
         repo: 'roomroster.v2',
-        state: 'open', 
-        per_page: 5,
-        page: 1,
+        state: 'open',
+        sort: 'created',
+        direction: 'desc', 
+        // per_page: 5,
+        // page: 1,
     }).then((data) => {return res.send({data: data})})
 });
 

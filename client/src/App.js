@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import PullCard from './components/cards';
+import SimpleAppBar from './components/appbar';
+
 
 class App extends Component {
   constructor(props) {
@@ -9,24 +12,20 @@ class App extends Component {
     };
   }
   
-  componentWillMount() {
+  componentDidMount() {
     fetch('/pull-requests')
-      .then(res => { return res.json() })
-      .then(data => this.setState(data));
+      .then(res => res.json())
+      .then(pulls => this.setState({data: pulls.data.data}))
+      .then(logs => console.log(this.state.data))
   }
 
   render() {
-    let pull = this.state.data;
-    console.log('pull ', pull.data);
+    let pulls = this.state ? this.state.data: null;
 
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">GOOD</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <SimpleAppBar />
+        <PullCard data={pulls}/>
       </div>
     );
   }
