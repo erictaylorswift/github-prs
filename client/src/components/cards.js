@@ -16,6 +16,7 @@ class PullCard extends Component {
                 let creator = pulls[i].user.login;
                 let created = moment(pulls[i].created_at).endOf('day').fromNow();
                 let url = pulls[i].html_url;
+                let avatar = pulls[i].user.avatar_url;
                 let assigned = pulls[i].assignee === null ? 'unassigned' : pulls[i].assignee.login;
                 let labelOne = pulls[i].labels.length === 0 ? ' ' : pulls[i].labels[0].name;
                 let labelTwo = pulls[i].labels.length === 0 ? ' ' : (pulls[i].labels[1] === undefined ? ' ' : '| ' + pulls[i].labels[1].name );
@@ -24,6 +25,9 @@ class PullCard extends Component {
                 if ( labelOne !== ' '){
                     let results = 
                         <div>
+                            <div>
+                                <img src={avatar} alt='avatar' className='avatar'/>
+                            </div>
                             <Card className='pull-card'>
                                 <CardContent className='header'>
                                     <Button size='large' href={url} variant='text'>
